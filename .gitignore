@@ -1,0 +1,9 @@
+# Secrets and environment files
+.env
+*.pem
+
+# IDEs and OS files
+.DS_Store
+.vscode/
+.idea/
+node_modules/

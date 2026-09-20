@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaStock | Inventory & Analytics SaaS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- AUTHENTICATION SCREEN -->
+    <div id="authContainer" class="auth-container">
+        <div class="auth-card">
+            <h2>PharmaStock SaaS</h2>
+            <p>Sign in to manage inventory and view AI insights.</p>
+            <input type="email" id="authEmail" placeholder="Shop Owner Email">
+            <input type="password" id="authPassword" placeholder="Password">
+            <div class="auth-buttons">
+                <button class="btn-blue" onclick="handleLogin()">Login</button>
+                <button class="btn-green" onclick="handleSignup()">Register</button>
+            </div>
+            <p id="authMsg" class="status-msg"></p>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div id="dashboardContainer" class="container" style="display: none;">
+        <div class="header-row">
+            <h1>PharmaStock Analytics</h1>
+            <div>
+                <span id="userEmailDisplay" class="user-badge"></span>
+                <button class="btn-red" onclick="handleLogout()">Sign Out</button>
+            </div>
+        </div>
+        
+        <div style="margin-bottom: 16px;">
+            <button class="btn-secondary" onclick="fetchInventory()">Refresh Data</button>
+        </div>
+
+        <!-- INSIGHTS PANEL -->
+        <div class="card insights-card">
+            <h3>Automated Business Insights</h3>
+            <ul id="insightsList">
+                <li>Analyzing stock data...</li>
+            </ul>
+        </div>
+
+        <!-- TABLE WRAPPER -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Med ID</th>
+                        <th>Medicine Name</th>
+                        <th>Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Rack Location</th>
+                        <th>Price (₹)</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <tr><td colspan="6">Fetching inventory items...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- UPDATE STOCK -->
+        <div class="card">
+            <h3>Receive or Dispense Existing Stock</h3>
+            <div class="form-group">
+                <input type="text" id="searchMed" list="medSuggestions" placeholder="Search Medicine Name or ID..." style="width: 280px;">
+                <datalist id="medSuggestions"></datalist>
+                
+                <input type="number" id="qtyChange" placeholder="Quantity" style="width: 120px;">
+                <button class="btn-green" onclick="modifyStock(1)">Receive Stock</button>
+                <button class="btn-red" onclick="modifyStock(-1)">Dispense</button>
+            </div>
+            <p id="updateMsg" class="status-msg"></p>
+        </div>
+
+        <!-- ADD MEDICINE -->
+        <div class="card">
+            <h3>Register New Item Entry</h3>
+            <div class="form-group">
+                <input type="text" id="newId" list="idSuggestions" placeholder="ID (e.g. MED105)" style="width: 130px;">
+                <datalist id="idSuggestions"></datalist>
+                
+                <input type="text" id="newName" list="nameSuggestions" placeholder="Medicine Name">
+                <datalist id="nameSuggestions"></datalist>
+
+                <input type="number" id="newQty" placeholder="Qty" style="width: 90px;">
+                <input type="date" id="newExpiry">
+                <input type="text" id="newRack" placeholder="Rack" style="width: 100px;">
+                <input type="number" id="newPrice" placeholder="Price (₹)" step="0.50" style="width: 100px;">
+                <button class="btn-blue" onclick="addNewMedicine()">Save Entry</button>
+            </div>
+            <p id="createMsg" class="status-msg"></p>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
