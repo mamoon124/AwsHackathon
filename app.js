@@ -10,12 +10,12 @@ import {
 
 // TODO: Replace with your actual Firebase project configuration from Firebase Console
 const firebaseConfig = {
-  apiKey: "AIzaSyDCjNBws8KUEmQUJSciqb4SEUUbs5zVYCM",
-  authDomain: "smart-inventory-manager-5846a.firebaseapp.com",
-  projectId: "smart-inventory-manager-5846a",
-  storageBucket: "smart-inventory-manager-5846a.firebasestorage.app",
-  messagingSenderId: "503651277052",
-  appId: "1:503651277052:web:d7cdef0c71a3b7db4bdf79"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialize Firebase
@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 // TODO: Paste your API Gateway Endpoint URL here
-const API_URL = "https://krw9ctv05g.execute-api.ap-south-1.amazonaws.com/inventory";
+const API_URL = "YOUR_AWS_API_GATEWAY_URL";
 let currentInventory = [];
 
 // --- FIREBASE AUTHENTICATION LISTENER ---
