@@ -4,100 +4,330 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PharmaStock | Inventory & Analytics SaaS</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <!-- AUTHENTICATION SCREEN -->
     <div id="authContainer" class="auth-container">
-        <div class="auth-card">
-            <h2>PharmaStock SaaS</h2>
-            <p>Sign in to manage inventory and view AI insights.</p>
-            <input type="email" id="authEmail" placeholder="Shop Owner Email">
-            <input type="password" id="authPassword" placeholder="Password">
-            <div class="auth-buttons">
-                <button class="btn-blue" onclick="handleLogin()">Login</button>
-                <button class="btn-green" onclick="handleSignup()">Register</button>
-            </div>
-            <p id="authMsg" class="status-msg"></p>
+        <div class="auth-shell">
+
+            <!-- Brand side -->
+            <aside class="auth-brand">
+                <span class="capsule capsule-a" aria-hidden="true"></span>
+                <span class="capsule capsule-b" aria-hidden="true"></span>
+
+                <div class="brand-lockup">
+                    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="markGradA" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#4f7cff"/>
+                                <stop offset="1" stop-color="#0fb5a3"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="32" height="32" rx="9" fill="url(#markGradA)"/>
+                        <g transform="rotate(-45 16 16)">
+                            <rect x="6" y="11" width="20" height="10" rx="5" fill="#fff"/>
+                            <path d="M16 11h5a5 5 0 0 1 0 10h-5z" fill="#0b1b3a" fill-opacity=".22"/>
+                        </g>
+                    </svg>
+                    <span class="brand-name">PharmaStock</span>
+                </div>
+
+                <div class="brand-body">
+                    <h1 class="brand-headline">Know what's on every shelf before it runs out.</h1>
+                    <p class="brand-copy">Track quantities, expiry dates, and rack locations in one place, with insights that tell you what to reorder first.</p>
+
+                    <div class="brand-preview" aria-hidden="true">
+                        <div class="preview-head">
+                            <span class="preview-title">Shelf check</span>
+                            <span class="preview-tag">Sample view</span>
+                        </div>
+                        <ul class="preview-list">
+                            <li>
+                                <div>
+                                    <p class="preview-name">Paracetamol 500 mg</p>
+                                    <p class="preview-meta">Rack A2 &middot; 12 units left</p>
+                                </div>
+                                <span class="pill pill-low">Low stock</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <p class="preview-name">Amoxicillin 250 mg</p>
+                                    <p class="preview-meta">Rack B1 &middot; Expires in 21 days</p>
+                                </div>
+                                <span class="pill pill-soon">Expiring</span>
+                            </li>
+                            <li>
+                                <div>
+                                    <p class="preview-name">Cetirizine 10 mg</p>
+                                    <p class="preview-meta">Rack C4 &middot; 240 units</p>
+                                </div>
+                                <span class="pill pill-ok">Healthy</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <ul class="brand-points">
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+                        Low-stock alerts
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+                        Expiry tracking
+                    </li>
+                    <li>
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+                        Rack locations
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Form side -->
+            <main class="auth-panel">
+                <div class="auth-card">
+                    <h2>Welcome back</h2>
+                    <p class="auth-sub">Sign in to manage inventory and view AI insights.</p>
+
+                    <div class="field">
+                        <label for="authEmail">Email</label>
+                        <div class="input-wrap">
+                            <svg class="icon leading" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                            <input type="email" id="authEmail" placeholder="Shop Owner Email" autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="authPassword">Password</label>
+                        <div class="input-wrap">
+                            <svg class="icon leading" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+                            <input type="password" id="authPassword" placeholder="Password" autocomplete="current-password">
+                            <button type="button" id="togglePassword" class="toggle-eye" aria-label="Show password" aria-pressed="false">
+                                <svg class="icon eye-on" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+                                <svg class="icon eye-off" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" onclick="handleLogin()">Sign in</button>
+
+                    <div class="divider"><span>New to PharmaStock?</span></div>
+
+                    <button class="btn btn-outline btn-block" onclick="handleSignup()">Create account</button>
+
+                    <p id="authMsg" class="status-msg"></p>
+                </div>
+            </main>
         </div>
     </div>
 
     <!-- MAIN DASHBOARD -->
-    <div id="dashboardContainer" class="container" style="display: none;">
-        <div class="header-row">
-            <h1>PharmaStock Analytics</h1>
-            <div>
-                <span id="userEmailDisplay" class="user-badge"></span>
-                <button class="btn-red" onclick="handleLogout()">Sign Out</button>
+    <div id="dashboardContainer" class="dashboard" style="display: none;">
+
+        <header class="topbar">
+            <div class="topbar-inner">
+                <div class="brand-lockup brand-lockup-dark">
+                    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="markGradB" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0" stop-color="#4f7cff"/>
+                                <stop offset="1" stop-color="#0fb5a3"/>
+                            </linearGradient>
+                        </defs>
+                        <rect width="32" height="32" rx="9" fill="url(#markGradB)"/>
+                        <g transform="rotate(-45 16 16)">
+                            <rect x="6" y="11" width="20" height="10" rx="5" fill="#fff"/>
+                            <path d="M16 11h5a5 5 0 0 1 0 10h-5z" fill="#0b1b3a" fill-opacity=".22"/>
+                        </g>
+                    </svg>
+                    <span class="brand-name">PharmaStock</span>
+                </div>
+                <div class="topbar-actions">
+                    <span id="userEmailDisplay" class="user-badge"></span>
+                    <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Sign out</button>
+                </div>
             </div>
-        </div>
-        
-        <div style="margin-bottom: 16px;">
-            <button class="btn-secondary" onclick="fetchInventory()">Refresh Data</button>
-        </div>
+        </header>
 
-        <!-- INSIGHTS PANEL -->
-        <div class="card insights-card">
-            <h3>Automated Business Insights</h3>
-            <ul id="insightsList">
-                <li>Analyzing stock data...</li>
-            </ul>
-        </div>
+        <main class="container">
 
-        <!-- TABLE WRAPPER -->
-        <div class="table-wrapper">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Med ID</th>
-                        <th>Medicine Name</th>
-                        <th>Quantity</th>
-                        <th>Expiry Date</th>
-                        <th>Rack Location</th>
-                        <th>Price (₹)</th>
-                    </tr>
-                </thead>
-                <tbody id="inventoryBody">
-                    <tr><td colspan="6">Fetching inventory items...</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- UPDATE STOCK -->
-        <div class="card">
-            <h3>Receive or Dispense Existing Stock</h3>
-            <div class="form-group">
-                <input type="text" id="searchMed" list="medSuggestions" placeholder="Search Medicine Name or ID..." style="width: 280px;">
-                <datalist id="medSuggestions"></datalist>
-                
-                <input type="number" id="qtyChange" placeholder="Quantity" style="width: 120px;">
-                <button class="btn-green" onclick="modifyStock(1)">Receive Stock</button>
-                <button class="btn-red" onclick="modifyStock(-1)">Dispense</button>
+            <div class="page-head">
+                <h1>Inventory overview</h1>
+                <p>Stock levels, expiry dates, and reorder alerts across your shop.</p>
             </div>
-            <p id="updateMsg" class="status-msg"></p>
-        </div>
 
-        <!-- ADD MEDICINE -->
-        <div class="card">
-            <h3>Register New Item Entry</h3>
-            <div class="form-group">
-                <input type="text" id="newId" list="idSuggestions" placeholder="ID (e.g. MED105)" style="width: 130px;">
-                <datalist id="idSuggestions"></datalist>
-                
-                <input type="text" id="newName" list="nameSuggestions" placeholder="Medicine Name">
-                <datalist id="nameSuggestions"></datalist>
+            <!-- SUMMARY STATS (filled by ui.js from the table below) -->
+            <section class="stats" aria-label="Inventory summary">
+                <article class="panel stat">
+                    <span class="stat-icon tone-brand">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+                    </span>
+                    <div>
+                        <p class="stat-label">Medicines tracked</p>
+                        <p class="stat-value" id="statItems">&ndash;</p>
+                        <p class="stat-note" id="statItemsNote">Waiting for data</p>
+                    </div>
+                </article>
 
-                <input type="number" id="newQty" placeholder="Qty" style="width: 90px;">
-                <input type="date" id="newExpiry">
-                <input type="text" id="newRack" placeholder="Rack" style="width: 100px;">
-                <input type="number" id="newPrice" placeholder="Price (₹)" step="0.50" style="width: 100px;">
-                <button class="btn-blue" onclick="addNewMedicine()">Save Entry</button>
+                <article class="panel stat">
+                    <span class="stat-icon tone-teal">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M6 3h12"/><path d="M6 8h12"/><path d="m6 13 8.5 8"/><path d="M6 13h3"/><path d="M9 13c6.667 0 6.667-10 0-10"/></svg>
+                    </span>
+                    <div>
+                        <p class="stat-label">Stock value</p>
+                        <p class="stat-value" id="statValue">&ndash;</p>
+                        <p class="stat-note" id="statValueNote">At listed prices</p>
+                    </div>
+                </article>
+
+                <article class="panel stat">
+                    <span class="stat-icon tone-red">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                    </span>
+                    <div>
+                        <p class="stat-label">Low stock</p>
+                        <p class="stat-value" id="statLow">&ndash;</p>
+                        <p class="stat-note" id="statLowNote">Waiting for data</p>
+                    </div>
+                </article>
+
+                <article class="panel stat">
+                    <span class="stat-icon tone-amber">
+                        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                    </span>
+                    <div>
+                        <p class="stat-label">Expiring within 30 days</p>
+                        <p class="stat-value" id="statExpiring">&ndash;</p>
+                        <p class="stat-note" id="statExpiringNote">Waiting for data</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- INSIGHTS PANEL -->
+            <section class="panel insights-card">
+                <div class="insights-head">
+                    <span class="insights-icon">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+                    </span>
+                    <h2>Automated business insights</h2>
+                </div>
+                <ul id="insightsList">
+                    <li>Analyzing stock data...</li>
+                </ul>
+            </section>
+
+            <!-- TABLE WRAPPER -->
+            <section class="panel table-wrapper">
+                <div class="panel-head">
+                    <div>
+                        <h2>Current inventory</h2>
+                        <p>Rows highlighted in red are running low.</p>
+                    </div>
+                    <button class="btn btn-outline btn-sm" onclick="fetchInventory()">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M8 16H3v5"/></svg>
+                        Refresh data
+                    </button>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Med ID</th>
+                                <th>Medicine Name</th>
+                                <th>Quantity</th>
+                                <th>Expiry Date</th>
+                                <th>Rack Location</th>
+                                <th>Price (₹)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventoryBody">
+                            <tr><td colspan="6">Fetching inventory items...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <div class="forms">
+
+                <!-- UPDATE STOCK -->
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h2>Receive or dispense stock</h2>
+                            <p>Update the quantity of a medicine you already track.</p>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-grid">
+                            <div class="field field-full">
+                                <label for="searchMed">Medicine</label>
+                                <input type="text" id="searchMed" list="medSuggestions" placeholder="Search Medicine Name or ID...">
+                                <datalist id="medSuggestions"></datalist>
+                            </div>
+                            <div class="field field-full">
+                                <label for="qtyChange">Quantity</label>
+                                <input type="number" id="qtyChange" placeholder="Quantity">
+                            </div>
+                            <button class="btn btn-success" onclick="modifyStock(1)">Receive stock</button>
+                            <button class="btn btn-danger-soft" onclick="modifyStock(-1)">Dispense</button>
+                        </div>
+                        <p id="updateMsg" class="status-msg"></p>
+                    </div>
+                </section>
+
+                <!-- ADD MEDICINE -->
+                <section class="panel">
+                    <div class="panel-head">
+                        <div>
+                            <h2>Add a new medicine</h2>
+                            <p>Register an item that isn't in your inventory yet.</p>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="newId">Medicine ID</label>
+                                <input type="text" id="newId" list="idSuggestions" placeholder="ID (e.g. MED105)">
+                                <datalist id="idSuggestions"></datalist>
+                            </div>
+                            <div class="field">
+                                <label for="newName">Medicine name</label>
+                                <input type="text" id="newName" list="nameSuggestions" placeholder="Medicine Name">
+                                <datalist id="nameSuggestions"></datalist>
+                            </div>
+                            <div class="field">
+                                <label for="newQty">Quantity</label>
+                                <input type="number" id="newQty" placeholder="Qty">
+                            </div>
+                            <div class="field">
+                                <label for="newExpiry">Expiry date</label>
+                                <input type="date" id="newExpiry">
+                            </div>
+                            <div class="field">
+                                <label for="newRack">Rack location</label>
+                                <input type="text" id="newRack" placeholder="Rack">
+                            </div>
+                            <div class="field">
+                                <label for="newPrice">Price (₹)</label>
+                                <input type="number" id="newPrice" placeholder="Price (₹)" step="0.50">
+                            </div>
+                            <button class="btn btn-primary field-full" onclick="addNewMedicine()">Save entry</button>
+                        </div>
+                        <p id="createMsg" class="status-msg"></p>
+                    </div>
+                </section>
+
             </div>
-            <p id="createMsg" class="status-msg"></p>
-        </div>
+        </main>
     </div>
 
+    <script src="ui.js" defer></script>
     <script type="module" src="app.js"></script>
 </body>
 </html>
